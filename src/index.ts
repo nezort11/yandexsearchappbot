@@ -10,7 +10,15 @@ const main = () => {
 
   const bot = new Telegraf(process.env.API_TOKEN);
 
-  bot.start((ctx) => ctx.reply("Welcome to the app!"));
+  bot.start(async (ctx) => {
+    await ctx.reply("Welcome to the app!", {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Open", web_app: { url: "https://ya.ru" } }],
+        ],
+      },
+    });
+  });
 
   bot.on("text", async (ctx) => {
     await ctx.telegram.sendMessage(
